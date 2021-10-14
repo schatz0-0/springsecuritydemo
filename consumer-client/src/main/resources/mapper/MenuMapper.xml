@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zime.consumerclient.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.zime.consumerclient.mode.Menu">
+        <id property="id" column="id"/>
+        <result property="pattern" column="pattern"/>
+        <collection property="roles" ofType="com.zime.consumerclient.mode.Role">
+            <id property="id" column="rid"/>
+            <result property="value" column="rvalue"/>
+            <result property="realname" column="realname"/>
+        </collection>
+    </resultMap>
+    <select id="getAllMenus" resultMap="BaseResultMap">
+        select m.*,r.id as rid,r.value as rvalue,r.realname as realname
+        from menu m
+        left join menu_role mr on m.`id` = mr.`mid`
+        left join role r on mr.`rid` = r.`id`
+    </select>
+    <select id="getMenuListByUserId" resultMap="BaseResultMap">
+        select m.*,r.id as rid,r.value as rvalue,r.realname as realname
+        from menu m left join menu_role mr
+        on m.`id` = mr.`mid` left join role r
+        on mr.`rid` = r.`id` left join jwtuser_role jr
+        on jr.`rid` = r.`id` and jr.`uid` = #{id}
+    </select>
+    <resultMap id="RouteResultMap" type="com.zime.consumerclient.mode.MenuRoute">
+        <id property="id" column="id"/>
+        <result property="path" column="path"/>
+        <result property="name" column="name"/>
+        <result property="component" column="component"/>
+        <result property="redirect" column="redirect"/>
+        <result property="parentid" column="parentid"/>
+        <association property="meta" javaType="com.zime.consumerclient.mode.Meta">
+            <result property="title" column="title"/>
+            <result property="affix" column="affix"/>
+            <result property="icon" column="icon"/>
+        </association>
+        <association property="parent" javaType="com.zime.consumerclient.mode.MenuRoute"/>
+        <collection property="children" column="id" ofType="com.zime.consumerclient.mode.MenuRoute" select="getChildRouteByRouteId"></collection>
+    </resultMap>
+    <select id="getChildRouteByRouteId" resultMap="RouteResultMap">
+        select rt.id,rt.path,rt.name,rt.component,rt.redirect,rt.parent as parentid,
+               mt.title,mt.affix,mt.icon
+        from route rt
+        inner join meta mt on mt.`id` = rt.`meta` and rt.parent = #{id}
+    </select>
+    <select id="getRoutesByUserId" resultMap="RouteResultMap">
+        select  rt.id,rt.path,rt.name,rt.component,rt.redirect,rt.parent as parentid,
+                mt.title,mt.affix,mt.icon
+        from route rt
+                 inner join meta mt on mt.`id` = rt.`meta`
+                 inner join menu m on m.`routeid` = rt.`id`
+                 inner join menu_role mr on mr.`mid` = m.`id`
+                 inner join jwtuser_role jr on jr.`rid` = mr.`rid` and jr.`uid` = #{id}
+    </select>
+
+    <select id="getBaseHomeRoute" resultMap="RouteResultMap">
+        select rt.id,rt.path,rt.name,rt.component,rt.redirect,rt.parent as parentid,
+               mt.title,mt.affix,mt.icon
+        from route rt
+                 inner join meta mt on mt.`id` = rt.`meta` and `rt`.`parent` = -1
+    </select>
+
+    <resultMap id="ParentRouteResultMap" type="com.zime.consumerclient.mode.MenuRoute">
+        <id property="id" column="id"/>
+        <result property="path" column="path"/>
+        <result property="name" column="name"/>
+        <result property="component" column="component"/>
+        <result property="redirect" column="redirect"/>
+        <result property="parentid" column="parentid"/>
+        <association property="meta" javaType="com.zime.consumerclient.mode.Meta">
+            <result property="title" column="title"/>
+            <result property="affix" column="affix"/>
+            <result property="icon" column="icon"/>
+        </association>
+        <association property="parent" javaType="com.zime.consumerclient.mode.MenuRoute"
+                     column="parentid"
+                     select="getRouteByRouteId"/>
+        <collection property="children"
+                    ofType="com.zime.consumerclient.mode.MenuRoute">
+        </collection>
+    </resultMap>
+
+    <select id="getRouteByRouteId" resultMap="ParentRouteResultMap">
+        select rt.id,rt.path,rt.name,rt.component,rt.redirect,rt.parent as parentid,
+               mt.title,mt.affix,mt.icon
+        from route rt
+                 inner join meta mt on mt.`id` = rt.`meta` and rt.id = #{parentid}
+    </select>
+
+    <select id="getParentRouteByRouteId" resultMap="ParentRouteResultMap">
+        select rt.id,rt.path,rt.name,rt.component,rt.redirect,rt.parent as parentid,
+               mt.title,mt.affix,mt.icon
+        from route rt
+                 inner join meta mt on mt.`id` = rt.`meta` and rt.id = #{id}
+    </select>
+</mapper>

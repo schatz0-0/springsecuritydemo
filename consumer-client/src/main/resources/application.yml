@@ -1,0 +1,42 @@
+spring:
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd
+    serialization:
+      # Date返回前端转时间戳 但不能解决LocalDateTime转时间戳（JacksonCustomizerConfig类解决）
+      write-dates-as-timestamps: true
+    #设置空如何序列化
+    default-property-inclusion: non_empty
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://120.53.231.72:3306/quanxian?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false&allowMultiQueries=true&&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  application:
+    name: consumer-client
+  cloud:
+    config:
+      enabled: false
+server:
+  port: 8082
+mybatis:
+  mapper-locations: classpath*:mapper/*xml
+  type-aliases-package: com.zime.consumerclient
+  configuration:
+    map-underscore-to-camel-case: true      #开启驼峰命名
+log4j:
+  logger:
+    Java:
+      sql:
+        Connection: DEBUG
+    com:
+      ibatis: DEBUG
+      ibatis.common.jdbc.ScriptRunner: DEBUG
+      ibatis.common.jdbc.SimpleDataSource: DEBUG
+    java:
+      sql:
+        PreparedStatement: DEBUG　
+        Statement: DEBUG
+gaode:
+  key: a4c982fd12f2b598150e93cc9d8f4143

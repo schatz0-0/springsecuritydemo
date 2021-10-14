@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zime.consumerclient.mapper.UserMapper">
+    <select id="getAllUsers" resultType="com.zime.consumerclient.mode.User">
+        select * from user;
+    </select>
+
+    <insert id="addUser" parameterType="com.zime.consumerclient.mode.User" keyProperty="id">
+        insert into user(id,name,gender,nation,birthday,email,qq,mobile,wechat,speciality)
+        values (#{id},#{name},#{gender},#{nation},#{birthday,jdbcType=DATE},#{email},#{qq},#{mobile},#{wechat},#{speciality})
+    </insert>
+
+    <update id="updateUser" parameterType="com.zime.consumerclient.mode.User">
+        update user set name =#{name},gender = #{gender} ,nation = #{nation},birthday = #{birthday},
+                        email=#{email},qq=#{qq},mobile=#{mobile},wechat=#{wechat},speciality=#{speciality} where id = #{id}
+    </update>
+
+    <delete id="deleteUserById">
+        delete from user where id = #{id}
+    </delete>
+
+    <select id="getUserById" resultType="com.zime.consumerclient.mode.User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="getUserList" resultType="com.zime.consumerclient.mode.User">
+        select * from VehicleManager.user
+    </select>
+    <select id="getUser" resultType="com.zime.consumerclient.mode.User" parameterType="com.zime.consumerclient.mode.User">
+        select * from VehicleManager.user
+        <where>
+            <if test="userId!= null and userId != ''">
+                and `user_id` = #{userId}
+            </if>
+            <if test="username!= null and username != ''">
+                and `username` like concat('%',#{username},'%')
+            </if>
+            <if test="name!=null and name != ''">
+                and `name` like concat('%',#{name},'%')
+            </if>
+            <if test="phoneNumber!=null and phoneNumber != ''">
+                and `phone_number` like concat('%',#{phoneNumber},'%')
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getUserByUsername" parameterType="string" resultType="com.zime.consumerclient.mode.User">
+        select * from VehicleManager.user where username=#{username}
+    </select>
+
+    <select id="getUserByName" parameterType="string" resultType="com.zime.consumerclient.mode.User">
+        select * from VehicleManager.user where username=#{username}
+    </select>
+
+
+    <delete id="deleteUser" parameterType="Long">
+        delete from VehicleManager.user where user_id = #{userId}
+    </delete>
+</mapper>
