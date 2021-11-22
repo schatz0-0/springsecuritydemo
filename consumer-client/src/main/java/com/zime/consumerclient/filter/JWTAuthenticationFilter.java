@@ -1,8 +1,6 @@
 package com.zime.consumerclient.filter;
 
-import com.zime.consumerclient.mode.JwtUser;
-import com.zime.consumerclient.mode.Result;
-import com.zime.consumerclient.mode.ReturnCode;
+import com.zime.consumerclient.pojo.JwtUser;
 import com.zime.consumerclient.util.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zime.consumerclient.vo.ResultGenerator;

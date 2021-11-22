@@ -1,4 +1,4 @@
-package com.zime.consumerclient.mode;
+package com.zime.consumerclient.pojo;
 
 
 import lombok.AllArgsConstructor;

@@ -1,8 +1,8 @@
 package com.zime.consumerclient.mapper;
 
 
-import com.zime.consumerclient.mode.Menu;
-import com.zime.consumerclient.mode.MenuRoute;
+import com.zime.consumerclient.pojo.Menu;
+import com.zime.consumerclient.pojo.MenuRoute;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

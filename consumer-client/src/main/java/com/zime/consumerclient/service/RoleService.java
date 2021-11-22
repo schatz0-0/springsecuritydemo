@@ -1,6 +1,6 @@
 package com.zime.consumerclient.service;
 
-import com.zime.consumerclient.mode.Role;
+import com.zime.consumerclient.pojo.Role;
 
 import java.util.List;
 

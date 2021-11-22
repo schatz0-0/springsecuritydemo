@@ -1,8 +1,10 @@
 package com.zime.consumerclient.service.impl;
 
 import com.zime.consumerclient.mapper.MenuMapper;
-import com.zime.consumerclient.mode.*;
+import com.zime.consumerclient.pojo.*;
 import com.zime.consumerclient.service.MenuService;
+import com.zime.consumerclient.vo.ResultGenerator;
+import com.zime.consumerclient.vo.ResultVo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,13 +18,10 @@ public class MenuServiceImpl implements MenuService {
     public MenuServiceImpl(MenuMapper menuMapper){this.menuMapper=menuMapper;}
 
     @Override
-    public Result getMenuListByUserId(int id) {
+    public ResultVo getMenuListByUserId(int id) {
         List<MenuRoute> menus = menuMapper.getRoutesByUserId(id);
         if (menus == null){
-            return new Result<List<Menu>>(
-                    ReturnCode.ERROR.getCode(), ReturnCode.ERROR.getType(),
-                    "查询用户菜单失败",null
-            );
+            return ResultGenerator.genFailResult("查询用户菜单失败");
         }
         List<MenuRoute> menuRoute = new ArrayList<MenuRoute>();
         for (MenuRoute menu:menus){
@@ -44,10 +43,7 @@ public class MenuServiceImpl implements MenuService {
         traverseToInertMenu(forestMenus,menuRoute);
         List<Route> resultRoute = new ArrayList<Route>();
         traverseToCreateMenuList(forestMenus,resultRoute);
-        return new Result<List<Route>>(
-                ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getType(),
-                "ok",resultRoute
-        );
+        return ResultGenerator.genSuccessResult(resultRoute, "ok");
     }
 
     private void insertMenuIntoForest(List<MenuRoute> forestMenus,MenuRoute menu){

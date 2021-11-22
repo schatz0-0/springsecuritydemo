@@ -1,6 +1,5 @@
-package com.zime.consumerclient.mode;
+package com.zime.consumerclient.pojo;
 
-import com.zime.consumerclient.mode.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

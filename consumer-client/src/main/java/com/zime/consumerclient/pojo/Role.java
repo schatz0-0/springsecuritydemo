@@ -1,5 +1,4 @@
-package com.zime.consumerclient.mode;
-
+package com.zime.consumerclient.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,13 +15,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Meta {
+public class Role {
 
-    private String title;
+    private Integer id;
 
-    private boolean affix;
+    private String value;
 
-    private String icon;
+    private String realname;
 
 
 }

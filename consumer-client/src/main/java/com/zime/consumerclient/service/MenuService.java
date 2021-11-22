@@ -1,7 +1,7 @@
 package com.zime.consumerclient.service;
 
-import com.zime.consumerclient.mode.Result;
+import com.zime.consumerclient.vo.ResultVo;
 
 public interface MenuService {
-    Result getMenuListByUserId(int id);
+    ResultVo getMenuListByUserId(int id);
 }

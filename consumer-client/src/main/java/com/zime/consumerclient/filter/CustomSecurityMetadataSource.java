@@ -1,8 +1,8 @@
 package com.zime.consumerclient.filter;
 
 import com.zime.consumerclient.mapper.MenuMapper;
-import com.zime.consumerclient.mode.Menu;
-import com.zime.consumerclient.mode.Role;
+import com.zime.consumerclient.pojo.Menu;
+import com.zime.consumerclient.pojo.Role;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;

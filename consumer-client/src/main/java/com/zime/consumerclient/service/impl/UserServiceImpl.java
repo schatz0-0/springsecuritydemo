@@ -1,11 +1,11 @@
 package com.zime.consumerclient.service.impl;
 
 import com.zime.consumerclient.mapper.UserMapper;
-import com.zime.consumerclient.mode.AffectedRows;
-import com.zime.consumerclient.mode.Result;
-import com.zime.consumerclient.mode.ReturnCode;
-import com.zime.consumerclient.mode.User;
+import com.zime.consumerclient.pojo.AffectedRows;
+import com.zime.consumerclient.pojo.User;
 import com.zime.consumerclient.service.UserService;
+import com.zime.consumerclient.vo.ResultGenerator;
+import com.zime.consumerclient.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,84 +23,55 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result addUser(User user) {
+    public ResultVo addUser(User user) {
         int result = userMapper.addUser(user);
         if (result == 1){
-            return new Result<AffectedRows>(
-                    ReturnCode.SUCCESS.getCode(),
-                    ReturnCode.SUCCESS.getType(),
-                    "添加成功",new AffectedRows(result)
-            );
+            return ResultGenerator.genSuccessResult(new AffectedRows(result), "添加成功");
         }
         else
         {
-            return new Result<AffectedRows>(
-                    ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getType(),
-                    "添加失败",new AffectedRows(result)
-            );
+            return ResultGenerator.genFailResult("添加失败");
         }
 
     }
 
     @Override
-    public Result getUserById(String id) {
+    public ResultVo getUserById(String id) {
         User user = userMapper.getUserById(id);
         if (user!=null){
-            return new Result<User>(
-                    ReturnCode.SUCCESS.getCode(),
-                    ReturnCode.SUCCESS.getType(),
-                    "查询成功",user
-            );
+            return ResultGenerator.genSuccessResult(user, "查询成功");
         }
         else
         {
-            return new Result<String>(
-                    ReturnCode.ERROR.getCode(),
-                    ReturnCode.ERROR.getType(),
-                    "查询失败请检查身份证号码",null
-            );
+            return ResultGenerator.genFailResult("查询失败请检查身份证号码");
         }
 
 
     }
 
     @Override
-    public Result deleteUserById(String id) {
+    public ResultVo deleteUserById(String id) {
 
         int result1 = userMapper.deleteUserById(id);
         if (result1 == 1){
-            return new Result<AffectedRows>(
-                    ReturnCode.SUCCESS.getCode(),
-                    ReturnCode.SUCCESS.getType(),
-                    "删除成功",new AffectedRows(result1)
-            );
+            return ResultGenerator.genSuccessResult(new AffectedRows(result1), "删除成功");
         }
         else
         {
-            return new Result<AffectedRows>(
-                    ReturnCode.ERROR.getCode(), ReturnCode.ERROR.getType(),
-                    "删除失败",new AffectedRows(result1)
-            );
+            return ResultGenerator.genFailResult("删除失败");
         }
     }
 
     @Override
-    public Result updateUser(User user) {
+    public ResultVo updateUser(User user) {
         System.out.println(user);
         int result = userMapper.updateUser(user);
         if (result == 1){
-            return new Result<AffectedRows>(
-                    ReturnCode.SUCCESS.getCode(),
-                    ReturnCode.SUCCESS.getType(),
-                    "添加成功",new AffectedRows(result)
-            );
+            return ResultGenerator.genSuccessResult(new AffectedRows(result), "添加成功");
         }
         else
         {
-            return new Result<AffectedRows>(
-                    ReturnCode.ERROR.getCode(), ReturnCode.ERROR.getType(),
-                    "添加失败",new AffectedRows(result)
-            );
+            return ResultGenerator.genFailResult("添加失败");
         }
     }
 
@@ -110,20 +81,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result getUserAll() {
+    public ResultVo getUserAll() {
         List<User> list = userMapper.getAllUsers();
         if (!list.isEmpty()){
-            return new Result<List>(
-                    ReturnCode.SUCCESS.getCode(), ReturnCode.SUCCESS.getType(), "查询成功",list
-            );
+            return ResultGenerator.genSuccessResult(list, "查询成功");
         }
         else
         {
-            return new Result<String>(
-                    ReturnCode.ERROR.getCode(),
-                    ReturnCode.ERROR.getType(),
-                    "查询失败",null
-            );
+            return ResultGenerator.genFailResult("查询失败");
         }
     }
 

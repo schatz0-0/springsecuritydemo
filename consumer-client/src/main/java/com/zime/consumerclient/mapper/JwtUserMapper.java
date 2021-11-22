@@ -1,7 +1,7 @@
 package com.zime.consumerclient.mapper;
 
-import com.zime.consumerclient.mode.JwtUser;
-import com.zime.consumerclient.mode.Role;
+import com.zime.consumerclient.pojo.JwtUser;
+import com.zime.consumerclient.pojo.Role;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

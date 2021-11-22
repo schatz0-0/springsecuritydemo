@@ -1,4 +1,4 @@
-package com.zime.consumerclient.mode;
+package com.zime.consumerclient.pojo;
 
 
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 
 /**
  * <p>
@@ -19,19 +18,18 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Route{
+public class Menu {
 
-    private String path;
 
-    private String name;
+    private Integer id;
 
-    private String component;
+    private String pattern;
 
-    private Meta meta;
+    private List<Role> roles;
 
-    private String redirect;
+    private Route route;
 
-    private List<Route> children;
+
 
 
 }

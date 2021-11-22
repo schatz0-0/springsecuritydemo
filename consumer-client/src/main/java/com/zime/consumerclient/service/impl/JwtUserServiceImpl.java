@@ -1,7 +1,7 @@
 package com.zime.consumerclient.service.impl;
 
 import com.zime.consumerclient.mapper.JwtUserMapper;
-import com.zime.consumerclient.mode.JwtUser;
+import com.zime.consumerclient.pojo.JwtUser;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

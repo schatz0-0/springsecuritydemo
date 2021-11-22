@@ -1,7 +1,6 @@
 package com.zime.consumerclient.mapper;
 
-import com.zime.consumerclient.mode.Result;
-import com.zime.consumerclient.mode.User;
+import com.zime.consumerclient.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

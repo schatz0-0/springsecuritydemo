@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zime.consumerclient.mapper.UserRoleMapper">
 
-    <insert id="addUserRole" parameterType="com.zime.consumerclient.mode.UserRole">
+    <insert id="addUserRole" parameterType="com.zime.consumerclient.pojo.UserRole">
         insert into VehicleManager.user_role (user_role_id,user_id,role_id) values(#{userRoleId},#{userId},#{roleId})
     </insert>
-    <update id="updateUserRole" parameterType="com.zime.consumerclient.mode.UserRole">
+    <update id="updateUserRole" parameterType="com.zime.consumerclient.pojo.UserRole">
         update VehicleManager.user_role
         <set>
             <if test="userId!= null and userId!= ''">
@@ -20,7 +20,7 @@
         where user_role_id=#{userRoleId}
     </update>
 
-    <select id="getUserRole" resultType="com.zime.consumerclient.mode.UserRole" parameterType="com.zime.consumerclient.mode.UserRole">
+    <select id="getUserRole" resultType="com.zime.consumerclient.pojo.UserRole" parameterType="com.zime.consumerclient.pojo.UserRole">
         select * from VehicleManager.user_role
         <where>
             <if test="userRoleId!= null and userRoleId != ''">
@@ -35,11 +35,11 @@
         </where>
     </select>
 
-    <delete id="deleteUserRole" parameterType="com.zime.consumerclient.mode.UserRole">
+    <delete id="deleteUserRole" parameterType="com.zime.consumerclient.pojo.UserRole">
         delete from VehicleManager.user_role where user_role_id = #{userRoleId}
     </delete>
 
-    <select id="getUserRoleList" resultType="com.zime.consumerclient.mode.UserRole">
+    <select id="getUserRoleList" resultType="com.zime.consumerclient.pojo.UserRole">
         select * from VehicleManager.user_role
     </select>
 </mapper>

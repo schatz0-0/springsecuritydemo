@@ -2,7 +2,7 @@ package com.zime.consumerclient.service.impl;
 
 import com.zime.consumerclient.util.SnowflakeIdWorker;
 import com.zime.consumerclient.mapper.UserRoleMapper;
-import com.zime.consumerclient.mode.UserRole;
+import com.zime.consumerclient.pojo.UserRole;
 import com.zime.consumerclient.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zime.consumerclient.mapper.RoleMapper">
 
-    <insert id="addRole" parameterType="com.zime.consumerclient.mode.Role">
+    <insert id="addRole" parameterType="com.zime.consumerclient.pojo.Role">
         insert into VehicleManager.role (role_id,role_name) values(#{roleId},#{roleName})
     </insert>
-    <update id="updateRole" parameterType="com.zime.consumerclient.mode.Role">
+    <update id="updateRole" parameterType="com.zime.consumerclient.pojo.Role">
         update VehicleManager.role
         <set>
             <if test="roleName!= null and roleName!= ''">
@@ -16,19 +16,19 @@
         </set>
         where role_id=#{roleId}
     </update>
-    <delete id="deleteRole" parameterType="com.zime.consumerclient.mode.Role">
+    <delete id="deleteRole" parameterType="com.zime.consumerclient.pojo.Role">
         delete from VehicleManager.role where role_id = #{roleId}
     </delete>
 
 
-    <select id="getRoleById" resultType="com.zime.consumerclient.mode.Role" parameterType="Long">
+    <select id="getRoleById" resultType="com.zime.consumerclient.pojo.Role" parameterType="Long">
         select u.*,ur.*,r.*
         from user_role ur
         left join user u on u.user_id=ur.user_id
         left join role r on r.role_id=ur.role_id
         where ur.user_id=#{userId}
     </select>
-    <select id="getRoleList" resultType="com.zime.consumerclient.mode.Role">
+    <select id="getRoleList" resultType="com.zime.consumerclient.pojo.Role">
         select * from VehicleManager.role
     </select>
 </mapper>

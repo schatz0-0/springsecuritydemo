@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zime.consumerclient.mapper.UserMapper">
-    <select id="getAllUsers" resultType="com.zime.consumerclient.mode.User">
+    <select id="getAllUsers" resultType="com.zime.consumerclient.pojo.User">
         select * from user;
     </select>
 
-    <insert id="addUser" parameterType="com.zime.consumerclient.mode.User" keyProperty="id">
+    <insert id="addUser" parameterType="com.zime.consumerclient.pojo.User" keyProperty="id">
         insert into user(id,name,gender,nation,birthday,email,qq,mobile,wechat,speciality)
         values (#{id},#{name},#{gender},#{nation},#{birthday,jdbcType=DATE},#{email},#{qq},#{mobile},#{wechat},#{speciality})
     </insert>
 
-    <update id="updateUser" parameterType="com.zime.consumerclient.mode.User">
+    <update id="updateUser" parameterType="com.zime.consumerclient.pojo.User">
         update user set name =#{name},gender = #{gender} ,nation = #{nation},birthday = #{birthday},
                         email=#{email},qq=#{qq},mobile=#{mobile},wechat=#{wechat},speciality=#{speciality} where id = #{id}
     </update>
@@ -19,14 +19,14 @@
         delete from user where id = #{id}
     </delete>
 
-    <select id="getUserById" resultType="com.zime.consumerclient.mode.User">
+    <select id="getUserById" resultType="com.zime.consumerclient.pojo.User">
         select * from user where id = #{id}
     </select>
 
-    <select id="getUserList" resultType="com.zime.consumerclient.mode.User">
+    <select id="getUserList" resultType="com.zime.consumerclient.pojo.User">
         select * from VehicleManager.user
     </select>
-    <select id="getUser" resultType="com.zime.consumerclient.mode.User" parameterType="com.zime.consumerclient.mode.User">
+    <select id="getUser" resultType="com.zime.consumerclient.pojo.User" parameterType="com.zime.consumerclient.pojo.User">
         select * from VehicleManager.user
         <where>
             <if test="userId!= null and userId != ''">
@@ -45,11 +45,11 @@
     </select>
 
 
-    <select id="getUserByUsername" parameterType="string" resultType="com.zime.consumerclient.mode.User">
+    <select id="getUserByUsername" parameterType="string" resultType="com.zime.consumerclient.pojo.User">
         select * from VehicleManager.user where username=#{username}
     </select>
 
-    <select id="getUserByName" parameterType="string" resultType="com.zime.consumerclient.mode.User">
+    <select id="getUserByName" parameterType="string" resultType="com.zime.consumerclient.pojo.User">
         select * from VehicleManager.user where username=#{username}
     </select>
 
